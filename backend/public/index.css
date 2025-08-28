@@ -212,14 +212,14 @@ h1, h2 {
   line-height: 1.2;
   text-transform: uppercase;
   text-align: center;
-  padding: 30px;
+  padding: 10px;
 }
 
 p {
   margin-bottom: 1.5rem;
   color: var(text-dim);
   font-weight: 300;
-  text-align: left;
+  text-align: center;
 }
 
 .hero-text h1 {
@@ -314,6 +314,7 @@ p {
   justify-content: center;
   align-items: center;
   perspective: 1000px;
+  
 }
 
 .profile-wrapper {
@@ -418,10 +419,13 @@ p {
 
 /* TICKETS STYLES */
 .tickets-container {
+  margin-top: 30px;
   margin: 0 auto;
   width: 400px;
   height: 400px;
   overflow-y: scroll;
+  border: solid 1px #14095d;
+  box-shadow: #ffffff;
 }
 
 .grid { 
@@ -434,17 +438,12 @@ p {
   padding: 8px; 
   border: 1px solid #ddd; 
   cursor: pointer; 
-  border-radius: 6px;
+  border-radius: 10px;
   font-weight: 700; 
+  height: 50px;
 }
 .ticket.free { 
-  background: linear-gradient(
-    180deg, #ffffff,
-    var(--neon-red),
-    var(--neon-pink)
-  );
-  background-attachment: fixed;
-  background-size: 100%;
+  background:#2f12af;
   animation: gradientShift 10s ease infinite;
   color: #000000;
 }
@@ -601,6 +600,7 @@ input,
 select,
 textarea {
     width: 100%;
+    margin: 10px;
     padding: 12px 15px;
     border: none;
     border-radius: 10px;
@@ -618,6 +618,23 @@ select:focus,
 textarea:focus {
     background-color: rgba(255,255,255,0.2);
     box-shadow: 0 0 8px #ffd700;
+}
+
+#paymentMethod{
+    width: 100%;
+    margin: 10px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#paymentMethod option {
+    background: #4f5152;
 }
 .bank-details h4 {
     margin-bottom: 10px;
@@ -651,6 +668,35 @@ textarea:focus {
     font-size: 0.9rem;
     color: #ccc;
     text-align: center;
+}
+
+
+#buyForm button{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 38px;
+  background: transparent;
+  color: var(--neon-red);
+  border: 2px solid var(--neon-red);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  box-shadow: 0 0 25px rgba(8, 87, 87, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  margin-bottom: 50px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+#buyForm button:hover {
+  background: #2f12af;
+  color: #000;
 }
 
 /* FORMULARIO */

@@ -122,10 +122,10 @@
 
 <!-- Formulario -->
 <div class="section" id="formSection" style="display:none;">
-  <h2>Formulario de compra</h2>
+  <h2>COMPLETA LOS DATOS PARA CONTINUAR</h2>
   <form id="buyForm">
-    <div><input type="text" id="name" placeholder="Nombre" required></div>
-    <div><input type="email" id="email" placeholder="Correo" required></div>
+    <div><input type="text" id="name" placeholder="Nombre y Apellido" required></div>
+    <div><input type="email" id="email" placeholder="Correo Electrónico" required></div>
     <div><input type="phone" id="phone" placeholder="Telefono" required></div>
     <select class="metodos" id="paymentMethod" required>
       <option value="">Método de pago</option>
@@ -138,7 +138,7 @@
     </select>
 
     <!-- Contenedor para detalles bancarios -->
-    <div id="bankDetailsContainer" style="margin-top:10px; display:none;">
+    <div class="bank" id="bankDetailsContainer" style="margin-top:10px; display:none;">
       <div id="pagoMovilDetails" class="bank-details" style="display:none;">
         <h4>Pago Móvil</h4>
         <p>Banco de Venezuela (0102)</p>
@@ -155,9 +155,7 @@
       </div>
       <div id="binanceDetails" class="bank-details" style="display:none;">
         <h4>Binance</h4>
-        <p>Wallet: 0xe689992f7cbea63a22bbf86fb030ba427f5907e8</p>
-        <p>Binance Pay ID: XXXXXXXX</p>
-        <p>Email: Jeinnermarin28@gmail.com</p>
+        <p>Binance Pay ID: 245503637</p>
       </div>
       <div id="paypalDetails" class="bank-details" style="display:none;">
         <h4>PayPal</h4>
@@ -170,8 +168,8 @@
     </div>
 
     <div><input type="file" id="proof" accept="image/*,application/pdf" required></div>
-    <div><input type="reference" id="reference" placeholder="últimos 4 digitos de referencia" required></div>
-    <div><button type="submit">Enviar compra</button></div>
+    <div><input type="reference" id="reference" placeholder="Últimos 4 digitos de referencia" required></div>
+    <div><button type="submit">Enviar</button></div>
   </form>
   <div id="msg" class="notice"></div>
 </div>
@@ -190,7 +188,11 @@
           PURA<span>MELMA</span>
         </div>
         <p class="footer-text">
-          Síguenos en nuestras Redes Sociales, no te pierdas ni ún detalle
+          Síguenos en nuestras Redes Sociales, no te pierdas ni ún solo detalle y podrás ganar premios especiales.
+        </p>
+        <br>
+        <p>
+          #ConFéTodoseLogra  #Puramelma
         </p>
         <div class="social-links">
           <a href="https://www.facebook.com/oscar.chaparrocova" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -312,7 +314,8 @@ document.getElementById('buyForm').addEventListener('submit', async (e) => {
   if (!res.ok) {
     msg.textContent = '❌ ' + (data.error || 'Error en la compra');
   } else {
-    msg.textContent = '✔ Compra enviada. ID #' + data.purchaseId;
+    msg.textContent = '✔ Su solicitud ha sido procesada exitosamente, en las próximas 24 horas el equipo de trabajo se comunicará con usted. #Puramelma con fé todo se logra. Buena suerte! ID de compra: #' + data.purchaseId;
+
     selected.clear();
     loadTickets();
     updateSummary();
