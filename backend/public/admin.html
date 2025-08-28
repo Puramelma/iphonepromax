@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Administrativo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 class="panel-title">Panel Administrativo</h1>
+
+  <div id="login" class="login-card">
+    <h1>Puramelma | Panel Administrativo</h1>
+    <label>Ingrese la contraseña:</label>
+    <input type="password" id="secret" placeholder="Ingrese su clave">
+    <button id="enterBtn" class="btn neon-btn">Entrar</button>
+  </div>
+
+  <div id="panel" style="display:none;">
+    <div class="section card">
+      <h2>Configuración</h2>
+      <label>Total de tickets:</label>
+      <input type="number" id="totalTickets" min="1">
+      <button id="saveSettings" class="btn neon-btn">Guardar</button>
+      <div id="settingsMsg" class="notice"></div>
+
+      <hr>
+      <button id="downloadDb" class="btn neon-btn">📥 Descargar DB</button>
+      <input type="file" id="uploadDbFile" accept=".json" style="display:none;">
+      <button id="uploadDbBtn" class="btn neon-btn">📤 Subir DB</button>
+    </div>
+
+
+
+    <div class="section card" id="raffleDetails">
+        <h2>📊 Detalles de la Rifa</h2>
+        <p><strong>Participantes aprobados:</strong> <span id="approvedCount">—</span></p>
+        <p><strong>Tickets vendidos:</strong> <span id="soldTickets">—</span></p>
+        <p><strong>Tickets pendientes:</strong> <span id="pendingTickets">—</span></p>
+        <p><strong>Tickets disponibles:</strong> <span id="availableTickets">—</span></p>
+        <p><strong>Porcentaje vendido:</strong> <span id="soldPercentage">—</span></p>
+    </div>
+
+
+
+
+
+    <div class="section card">
+      <h2>Compras pendientes</h2>
+      <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Telefono</th><th>Tickets</th><th>Comprobante</th><th>Referencia</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="pending"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section card">
+      <h2>Participantes aprobados</h2>
+
+      <div class="filters">
+  <h3>Buscar participante</h3>
+  <input type="text" id="globalFilter" placeholder="Buscar por ID, nombre, teléfono, tickets o referencia">
+  <button onclick="loadApproved()">🔍 Buscar</button>
+</div>
+
+
+
+
+      <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Telefono</th><th>Referencia</th><th>Tickets</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="approved"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<script>
+let SECRET = null;
+
+document.getElementById('enterBtn').onclick = async () => {
+  SECRET = document.getElementById('secret').value;
+  const test = await fetch('/api/admin/settings', { headers: { 'X-Admin-Secret': SECRET } });
+  if (test.status === 403) { alert('Clave incorrecta'); return; }
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('panel').style.display = 'block';
+  await Promise.all([loadSettings(), loadPending(), loadApproved()]);
+await updateRaffleDetails();
+
+};
+
+async function loadSettings(){
+  const res = await fetch('/api/admin/settings', { headers: { 'X-Admin-Secret': SECRET } });
+  const data = await res.json();
+  document.getElementById('totalTickets').value = data.totalTickets || 0;
+}
+
+document.getElementById('saveSettings').onclick = async () => {
+  const value = parseInt(document.getElementById('totalTickets').value);
+  const res = await fetch('/api/admin/settings/tickets', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': SECRET },
+    body: JSON.stringify({ totalTickets: value })
+  });
+  const msg = document.getElementById('settingsMsg');
+  const data = await res.json();
+  if (!res.ok) msg.textContent = '❌ ' + (data.error || 'Error al guardar');
+  else {
+    msg.textContent = '✔ Total actualizado a ' + data.totalTickets;
+    await loadSettings();
+  }
+};
+
+async function loadPending(){
+  const res = await fetch('/api/admin/purchases?status=pending', { headers: { 'X-Admin-Secret': SECRET } });
+  const list = await res.json();
+  const tbody = document.getElementById('pending');
+  tbody.innerHTML = '';
+  (Array.isArray(list)?list:[]).forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${p.id}</td>
+      <td>${p.name}</td>
+      <td>${p.email}</td>
+      <td>${p.phone}</td>
+      <td>${p.tickets.join(', ')}</td>
+      <td>${p.proof ? `<a href="${p.proof}" target="_blank">Ver</a>` : '—'}</td>
+      <td>${p.reference}</td>
+      <td>
+        <button onclick="approve(${p.id})">Aceptar</button>
+        <button onclick="reject(${p.id})">Rechazar</button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+async function loadApproved(){
+  const res = await fetch('/api/admin/purchases?status=approved', { headers: { 'X-Admin-Secret': SECRET } });
+  const list = await res.json();
+  const tbody = document.getElementById('approved');
+  tbody.innerHTML = '';
+
+  const globalFilter = document.getElementById('globalFilter').value.toLowerCase();
+
+  (Array.isArray(list)?list:[]).forEach(p => {
+    const valuesToSearch = [
+      p.id.toString(),
+      p.name,
+      p.phone,
+      p.reference,
+      p.tickets.join(', ')
+    ].join(' ').toLowerCase();
+
+    if (!globalFilter || valuesToSearch.includes(globalFilter)) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${p.id}</td>
+        <td>${p.name}</td>
+        <td>${p.email}</td>
+        <td>${p.phone}</td>
+        <td>${p.reference}</td>
+        <td>${p.tickets.join(', ')}</td>
+        <td>
+          <button onclick="viewTickets(${p.id})">Ver tickets</button>
+          <button onclick="modify(${p.id})">Modificar</button>
+          <button onclick="removeP(${p.id})">Eliminar</button>
+        </td>`;
+      tbody.appendChild(tr);
+    }
+  });
+}
+
+document.getElementById('globalFilter').addEventListener('input', loadApproved);
+
+
+
+async function approve(id){
+  await fetch('/api/admin/purchases/'+id+'/approve', { method:'POST', headers: { 'X-Admin-Secret': SECRET } });
+  await Promise.all([loadSettings(), loadPending(), loadApproved()]);
+await updateRaffleDetails();
+
+}
+async function reject(id){
+  await fetch('/api/admin/purchases/'+id+'/reject', { method:'POST', headers: { 'X-Admin-Secret': SECRET } });
+  await Promise.all([loadSettings(), loadPending(), loadApproved()]);
+await updateRaffleDetails();
+
+}
+async function viewTickets(id){
+  const res = await fetch('/api/admin/purchases/'+id, { headers: { 'X-Admin-Secret': SECRET } });
+  const p = await res.json();
+  alert('Tickets: ' + p.tickets.join(', '));
+}
+async function modify(id){
+  const name = prompt('Nuevo nombre:');
+  const email = prompt('Nuevo email:');
+  const phone = prompt('Nuevo telefono:');
+  if (!name || !email) return;
+  await fetch('/api/admin/purchases/'+id, {
+    method:'PUT',
+    headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': SECRET },
+    body: JSON.stringify({ name, email, phone })
+  });
+  await loadApproved();
+}
+async function removeP(id){
+  if (!confirm('¿Eliminar participante y liberar tickets?')) return;
+  await fetch('/api/admin/purchases/'+id, { method:'DELETE', headers: { 'X-Admin-Secret': SECRET } });
+  await Promise.all([loadSettings(), loadPending(), loadApproved()]);
+await updateRaffleDetails();
+
+}
+
+// 📥 Descargar DB
+document.getElementById('downloadDb').onclick = async () => {
+  if (!SECRET) { alert('Ingrese la clave administrativa primero'); return; }
+  try {
+    const res = await fetch('/api/admin/db/download', {
+      method: 'GET',
+      headers: { 'X-Admin-Secret': SECRET }
+    });
+    if (res.status === 403) return alert('No autorizado: clave incorrecta.');
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: res.statusText }));
+      return alert('Error al descargar: ' + (err.error || res.statusText));
+    }
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'db.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (e) {
+    console.error('Error al descargar DB:', e);
+    alert('Error al descargar DB: ' + e.message);
+  }
+};
+
+
+
+
+
+
+// 📤 Subir DB
+document.getElementById('uploadDbBtn').onclick = () => {
+  document.getElementById('uploadDbFile').click();
+};
+
+document.getElementById('uploadDbFile').onchange = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  try {
+    const text = await file.text();
+    const json = JSON.parse(text);
+
+    const res = await fetch('/api/admin/db/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Secret': SECRET
+      },
+      body: JSON.stringify(json)
+    });
+
+    const data = await res.json();
+    if (!res.ok) return alert('❌ Error: ' + (data.error || 'No se pudo subir'));
+
+    alert('✔ ' + data.message);
+    // refrescar datos después de subir
+    await Promise.all([loadSettings(), loadPending(), loadApproved()]);
+  } catch (err) {
+    console.error('Error al subir DB:', err);
+    alert('Error: ' + err.message);
+  }
+};
+
+
+
+
+
+async function updateRaffleDetails(){
+  const settingsRes = await fetch('/api/admin/settings', { headers: { 'X-Admin-Secret': SECRET } });
+  const settings = await settingsRes.json();
+  const totalTickets = settings.totalTickets || 0;
+
+  const approvedRes = await fetch('/api/admin/purchases?status=approved', { headers: { 'X-Admin-Secret': SECRET } });
+  const approvedList = await approvedRes.json();
+  const approvedCount = approvedList.length;
+  const soldTickets = approvedList.reduce((sum, p) => sum + p.tickets.length, 0);
+
+  const pendingRes = await fetch('/api/admin/purchases?status=pending', { headers: { 'X-Admin-Secret': SECRET } });
+  const pendingList = await pendingRes.json();
+  const pendingTickets = pendingList.reduce((sum, p) => sum + p.tickets.length, 0);
+
+  const availableTickets = totalTickets - soldTickets - pendingTickets;
+  const soldPercentage = totalTickets > 0 ? ((soldTickets / totalTickets) * 100).toFixed(2) + '%' : '—';
+
+  document.getElementById('approvedCount').textContent = approvedCount;
+  document.getElementById('soldTickets').textContent = soldTickets;
+  document.getElementById('pendingTickets').textContent = pendingTickets;
+  document.getElementById('availableTickets').textContent = availableTickets;
+  document.getElementById('soldPercentage').textContent = soldPercentage;
+}
+
+</script>
+</body>
+</html>

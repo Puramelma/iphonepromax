@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PURAMELMA</title>
+    <!-- Link to google font for inserting fornt families -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <!-- Link to google font for inserting fornt families -->
+    <!-- Link to google font for inserting fornt families -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link to google font for inserting fornt families -->
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+        <!-- Navigation -->
+    <nav class="navbar">
+      <a href="index.html" class="logo">PURA<span>MELMA</span></a>
+
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span class="bar top"></span>
+        <span class="bar middle"></span>
+        <span class="bar bottom"></span>
+      </button>
+
+      <div class="nav-links">
+        <a href="#hero" class="nav-link">INICIO</a>
+        <a href="#footer" class="nav-link">REDES SOCIALES</a>
+        <a href="https://api.whatsapp.com/send?phone=584124303809" target="_blank" class="nav-link">SOPORTE</a>
+      </div>
+    </nav>  
+
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text"> 
+
+            <h1>SEGUIMOS TRAYENDO SOPRESAS PARA TI</h1>
+
+            <h2>IPHONE 12 PRO MAX</h2>
+
+            <p>
+              Jugador TOP con más tickets comprados gana Air Force 1. <br>
+
+              Premios especiales a través de nuestras historias en Instagram. <br>
+
+              Al alcanzar el 100% de la rifa se nombrará los ganadores a través de <strong>CHANCE A - 7:00pm
+            </p>
+
+            <p>
+              
+            </p>
+
+
+
+            <div class="btn-group">
+
+              <a href="#participate" id="btn-participar" class="btn btn-primary">
+                <i class="fa fa-rocket" aria-hidden="true"></i> Participar
+              </a>
+              <!-- 
+              <a href="#" class="btn btn-primary">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>Contact me
+              </a>
+              -->
+
+            </div>
+          </div>
+
+
+          <div class="profile-container">
+
+            <div class="profile-wrapper">
+
+              <img src="iphone.png" alt="Profile" class="profile-img">
+
+              <div class="glow-effect">
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<h1 style="display:none;">Compra de Tickets</h1>
+<div class="tickets-container" style="display:none;" id="participate">
+  <div id="tickets" class="grid"></div>
+</div>
+
+<!-- Resumen -->
+<div id="summary" style="display:none;">
+  <p id="summaryMsg">No has seleccionado ningún ticket todavía</p>
+  <div id="summaryInfo" style="display:none;">
+    <p><strong>Tickets seleccionados:</strong> <span id="count">0</span></p>
+    <p><strong>Valor de ticket:</strong> $1 USD</p>
+    <p><strong>Total USD:</strong> $<span id="totalUsd">0</span></p>
+    <p><strong>Total Bs:</strong> <span id="totalVes">0</span></p>
+    <button id="buyBtn">Comprar</button>
+  </div>
+</div>
+
+<!-- Formulario -->
+<div class="section" id="formSection" style="display:none;">
+  <h2>Formulario de compra</h2>
+  <form id="buyForm">
+    <div><input type="text" id="name" placeholder="Nombre" required></div>
+    <div><input type="email" id="email" placeholder="Correo" required></div>
+    <div><input type="phone" id="phone" placeholder="Telefono" required></div>
+    <select class="metodos" id="paymentMethod" required>
+      <option value="">Método de pago</option>
+      <option value="Pago Movil">Pago Movil</option>
+      <option value="Calzado">Calzado con @Inv_starshop</option>
+      <option value="Efectivo">Efectivo</option>
+      <option value="Binance">Binance</option>
+      <option value="Paypal">Paypal</option>
+      <option value="Zelle">Zelle</option>
+    </select>
+
+    <!-- Contenedor para detalles bancarios -->
+    <div id="bankDetailsContainer" style="margin-top:10px; display:none;">
+      <div id="pagoMovilDetails" class="bank-details" style="display:none;">
+        <h4>Pago Móvil</h4>
+        <p>Banco de Venezuela (0102)</p>
+        <p>04242708903</p>
+        <p>11055128</p>
+      </div>
+      <div id="calzadoDetails" class="bank-details" style="display:none;">
+        <h4>Compra con Inv Starshop</h4>
+        <p>En el campo de referencia indica la cantidad de calzados comprados.</p>
+      </div>
+      <div id="efectivoDetails" class="bank-details" style="display:none;">
+        <h4>Pago en efectivo</h4>
+        <p>Dirígete a nuestra oficina para realizar el pago en efectivo.</p>
+      </div>
+      <div id="binanceDetails" class="bank-details" style="display:none;">
+        <h4>Binance</h4>
+        <p>Wallet: 0xe689992f7cbea63a22bbf86fb030ba427f5907e8</p>
+        <p>Binance Pay ID: XXXXXXXX</p>
+        <p>Email: Jeinnermarin28@gmail.com</p>
+      </div>
+      <div id="paypalDetails" class="bank-details" style="display:none;">
+        <h4>PayPal</h4>
+        <p>Email: jeinnermarin28@gmail.com</p>
+      </div>
+      <div id="zelleDetails" class="bank-details" style="display:none;">
+        <h4>Zelle</h4>
+        <p>Email: Anicova805@gmail.com</p>
+      </div>
+    </div>
+
+    <div><input type="file" id="proof" accept="image/*,application/pdf" required></div>
+    <div><input type="reference" id="reference" placeholder="últimos 4 digitos de referencia" required></div>
+    <div><button type="submit">Enviar compra</button></div>
+  </form>
+  <div id="msg" class="notice"></div>
+</div>
+
+
+
+
+
+
+
+  <!-- footer -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          PURA<span>MELMA</span>
+        </div>
+        <p class="footer-text">
+          Síguenos en nuestras Redes Sociales, no te pierdas ni ún detalle
+        </p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/oscar.chaparrocova" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/oscar_chaparro28/" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://api.whatsapp.com/send?phone=584124303809" class="social-link"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://www.tiktok.com/@_oscarchaparro" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+        <p class="copyright">
+          &copy; 2025 Puramelma. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>   
+
+<script>
+// MENU NAVBAR
+const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita que el clic se propague
+    toggleBtn.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Cierra el menú si se hace clic fuera
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('open');
+      toggleBtn.classList.remove('open');
+    }
+  });
+
+  // Opcional: cerrar al hacer clic en un link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      toggleBtn.classList.remove('open');
+    });
+  });
+
+// MENU NAVBAR
+
+
+
+
+
+
+
+
+
+
+let selected = new Set();
+const priceUsd = 1;
+const priceVes = 160;
+
+async function loadTickets(){
+  const res = await fetch('/api/tickets');
+  const list = await res.json();
+  const grid = document.getElementById('tickets');
+  grid.innerHTML = '';
+  list.forEach(t => {
+    const b = document.createElement('button');
+    b.textContent = t.id;
+    b.className = 'ticket ' + t.status;
+    b.disabled = (t.status !== 'free');
+    if (t.status === 'free') {
+      b.onclick = () => {
+        if (selected.has(t.id)) { 
+          selected.delete(t.id); 
+          b.classList.remove('selected'); 
+        } else { 
+          selected.add(t.id); 
+          b.classList.add('selected'); 
+        }
+        updateSummary();
+      };
+    }
+    grid.appendChild(b);
+  });
+}
+
+function updateSummary(){
+  const count = selected.size;
+  document.getElementById('count').textContent = count;
+  document.getElementById('totalUsd').textContent = count * priceUsd;
+  document.getElementById('totalVes').textContent = count * priceVes;
+}
+
+document.getElementById('buyBtn').addEventListener('click', () => {
+  if(selected.size === 0){
+    alert("Selecciona al menos un ticket antes de comprar.");
+    return;
+  }
+  document.getElementById('buyForm').style.display = 'block';
+  document.getElementById('buyBtn').disabled = true;
+});
+
+document.getElementById('buyForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const proof = document.getElementById('proof').files[0];
+  const reference = document.getElementById('reference').value.trim();
+  const tickets = Array.from(selected);
+  const form = new FormData();
+  form.append('name', name);
+  form.append('email', email);
+  form.append('phone', phone);
+  form.append('tickets', JSON.stringify(tickets));
+  form.append('reference', reference);
+  if (proof) form.append('proof', proof);
+  
+
+  const res = await fetch('/api/tickets/buy', { method: 'POST', body: form });
+  const data = await res.json();
+  const msg = document.getElementById('msg');
+  if (!res.ok) {
+    msg.textContent = '❌ ' + (data.error || 'Error en la compra');
+  } else {
+    msg.textContent = '✔ Compra enviada. ID #' + data.purchaseId;
+    selected.clear();
+    loadTickets();
+    updateSummary();
+    document.getElementById('buyForm').reset();
+    document.getElementById('buyForm').style.display = 'none';
+    document.getElementById('buyBtn').disabled = false;
+  }
+});
+
+loadTickets();
+
+
+
+
+
+
+
+//Mostrar métodos de pago
+// MOSTRAR INFO SEGÚN MÉTODO DE PAGO
+const paymentSelect = document.getElementById("paymentMethod");
+const bankDetailsContainer = document.getElementById("bankDetailsContainer");
+const allDetails = document.querySelectorAll(".bank-details");
+
+paymentSelect.addEventListener("change", function () {
+  // Ocultar todos los detalles
+  allDetails.forEach(div => div.style.display = "none");
+
+  if (this.value === "") {
+    bankDetailsContainer.style.display = "none"; // nada seleccionado
+    return;
+  }
+
+  bankDetailsContainer.style.display = "block";
+
+  switch (this.value) {
+    case "Pago Movil":
+      document.getElementById("pagoMovilDetails").style.display = "block";
+      break;
+    case "Calzado":
+      document.getElementById("calzadoDetails").style.display = "block";
+      break;
+    case "Efectivo":
+      document.getElementById("efectivoDetails").style.display = "block";
+      break;
+    case "Binance":
+      document.getElementById("binanceDetails").style.display = "block";
+      break;
+    case "Paypal":
+      document.getElementById("paypalDetails").style.display = "block";
+      break;
+    case "Zelle":
+      document.getElementById("zelleDetails").style.display = "block";
+      break;
+  }
+});
+
+//Mostrar métodos de pago
+
+
+
+
+
+
+
+
+
+
+
+// Mostrar sección de tickets al dar clic en Participar
+document.getElementById("btn-participar").addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("participate").style.display = "block";
+  document.querySelector(".tickets-container").style.display = "block";
+  document.getElementById("summary").style.display = "block";
+
+  // Deslizar hasta la sección de tickets
+  document.getElementById("participate").scrollIntoView({ behavior: "smooth" });
+});
+
+// Actualizar resumen (sin scroll)
+function updateSummary(){
+  const count = selected.size;
+  if(count === 0){
+    document.getElementById("summaryMsg").style.display = "block";
+    document.getElementById("summaryInfo").style.display = "none";
+  } else {
+    document.getElementById("summaryMsg").style.display = "none";
+    document.getElementById("summaryInfo").style.display = "block";
+    document.getElementById("count").textContent = count;
+    document.getElementById("totalUsd").textContent = count * priceUsd;
+    document.getElementById("totalVes").textContent = count * priceVes;
+  }
+}
+
+// Mostrar formulario al dar clic en Comprar
+document.getElementById("buyBtn").addEventListener("click", () => {
+  if(selected.size === 0){
+    alert("Selecciona al menos un ticket antes de comprar.");
+    return;
+  }
+  document.getElementById("formSection").style.display = "block";
+  document.getElementById("buyBtn").disabled = true;
+
+  // Deslizar hasta el formulario
+  document.getElementById("formSection").scrollIntoView({ behavior: "smooth" });
+});
+
+</script>
+</body>
+</html>
