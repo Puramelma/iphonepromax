@@ -185,6 +185,61 @@ app.post('/api/admin/purchases/:id/approve', requireAdmin, (req, res) => {
   res.json({ success: true });
 });
 
+// ➕ Añadir tickets manualmente a un participante
+app.post('/api/admin/purchases/:id/add-tickets', requireAdmin, (req, res) => {
+  const db = readDB();
+  const purchase = db.purchases.find(p => String(p.id) === String(req.params.id));
+  if (!purchase) return res.status(404).json({ error: 'No existe el participante' });
+
+  let incoming = req.body.tickets;
+  try {
+    if (typeof incoming === 'string') {
+      incoming = incoming
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean)
+        .map(n => parseInt(n, 10));
+    }
+  } catch (e) {
+    return res.status(400).json({ error: 'Formato de tickets inválido' });
+  }
+
+  const tickets = Array.isArray(incoming) ? incoming.map(Number) : [];
+  if (!tickets.length || tickets.some(n => Number.isNaN(n))) {
+    return res.status(400).json({ error: 'Debe enviar un arreglo de IDs de tickets' });
+  }
+
+  const total = db.settings.totalTickets;
+  const fueraDeRango = tickets.filter(id => id < 0 || id >= total);
+  if (fueraDeRango.length) {
+    return res.status(400).json({ error: 'Ticket fuera de rango', tickets: fueraDeRango });
+  }
+
+  const yaTiene = new Set(purchase.tickets || []);
+  const nuevos = tickets.filter(id => !yaTiene.has(id));
+
+  if (!nuevos.length) {
+    return res.status(200).json({ success: true, purchase });
+  }
+
+  const noLibres = nuevos.filter(id => db.tickets[id]?.status !== 'free');
+  if (noLibres.length) {
+    return res.status(409).json({ error: 'Algunos tickets no están disponibles', tickets: noLibres });
+  }
+
+  nuevos.forEach(id => {
+    if (!db.tickets[id]) db.tickets[id] = { id, status: 'approved' };
+    db.tickets[id].status = 'approved';
+  });
+
+  purchase.tickets = Array.from(new Set([...(purchase.tickets || []), ...nuevos]));
+  purchase.status = 'approved';
+
+  writeDB(db);
+  res.json({ success: true, purchase });
+});
+
+
 // Reject purchase
 app.post('/api/admin/purchases/:id/reject', requireAdmin, (req, res) => {
   const db = readDB();

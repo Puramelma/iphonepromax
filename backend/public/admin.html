@@ -166,6 +166,7 @@ async function loadApproved(){
         <td>${p.tickets.join(', ')}</td>
         <td>
           <button onclick="viewTickets(${p.id})">Ver tickets</button>
+          <button onclick="openAddTicketsPrompt(${p.id})">Añadir tickets</button>
           <button onclick="modify(${p.id})">Modificar</button>
           <button onclick="removeP(${p.id})">Eliminar</button>
         </td>`;
@@ -309,6 +310,70 @@ async function updateRaffleDetails(){
   document.getElementById('availableTickets').textContent = availableTickets;
   document.getElementById('soldPercentage').textContent = soldPercentage;
 }
+
+
+
+
+
+
+
+// Expande "1,2,5-8" en [1,2,5,6,7,8]
+  function expandTicketInput(str) {
+    if (!str) return [];
+    return str
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean)
+      .flatMap(part => {
+        if (part.includes('-')) {
+          const [a, b] = part.split('-').map(n => parseInt(n.trim(), 10));
+          if (Number.isNaN(a) || Number.isNaN(b)) return [];
+          const [start, end] = a <= b ? [a, b] : [b, a];
+          return Array.from({length: end - start + 1}, (_, i) => start + i);
+        } else {
+          const n = parseInt(part, 10);
+          return Number.isNaN(n) ? [] : [n];
+        }
+      });
+  }
+
+  async function openAddTicketsPrompt(participantId) {
+    const input = prompt('Ingrese IDs de tickets (ej: 12,15,20-25):');
+    if (input === null) return;
+    const tickets = expandTicketInput(input);
+    if (!tickets.length) { alert('Entrada inválida'); return; }
+
+    try {
+      const res = await fetch(`/api/admin/purchases/${participantId}/add-tickets`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Secret': SECRET
+        },
+        body: JSON.stringify({ tickets })
+      });
+
+      if (res.status === 403) { alert('Clave inválida'); return; }
+      const data = await res.json();
+
+      if (!res.ok) {
+        const notFree = data?.tickets?.join(', ');
+        alert(data?.error ? `${data.error}${notFree ? ` (${notFree})` : ''}` : 'Error al añadir tickets');
+        return;
+      }
+
+      await Promise.all([
+        typeof loadParticipants === 'function' ? loadParticipants() : Promise.resolve(),
+        typeof loadPending === 'function' ? loadPending() : Promise.resolve(),
+        typeof loadRaffleDetails === 'function' ? loadRaffleDetails() : Promise.resolve()
+      ]);
+
+      alert('Tickets añadidos correctamente.');
+    } catch (e) {
+      console.error(e);
+      alert('Error de red al añadir tickets');
+    }
+  }
 
 </script>
 </body>
