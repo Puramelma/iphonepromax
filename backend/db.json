@@ -1569,7 +1569,7 @@
     },
     {
       "id": 391,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 392,
@@ -3961,7 +3961,7 @@
     },
     {
       "id": 989,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 990,
@@ -5824,6 +5824,20 @@
       "proof": "/uploads/proof-1756587018404-650535850.jpg",
       "reference": "0889",
       "createdAt": "2025-08-30T20:50:18.418Z"
+    },
+    {
+      "id": 1756594181765,
+      "name": "Valentina Mendoza",
+      "email": "alvirrut15@gmail.com",
+      "phone": "04241692296",
+      "tickets": [
+        989,
+        391
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756594181538-420792067.png",
+      "reference": "5856",
+      "createdAt": "2025-08-30T22:49:41.765Z"
     }
   ]
 }
