@@ -157,11 +157,11 @@
     },
     {
       "id": 38,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 39,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 40,
@@ -1205,7 +1205,7 @@
     },
     {
       "id": 300,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 301,
@@ -2469,7 +2469,7 @@
     },
     {
       "id": 616,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 617,
@@ -3117,7 +3117,7 @@
     },
     {
       "id": 778,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 779,
@@ -3669,7 +3669,7 @@
     },
     {
       "id": 916,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 917,
@@ -3997,7 +3997,7 @@
     },
     {
       "id": 998,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 999,
@@ -5773,6 +5773,37 @@
       "proof": "/uploads/proof-1756499166701-123388734.jpg",
       "reference": "1234",
       "createdAt": "2025-08-29T20:26:06.712Z"
+    },
+    {
+      "id": 1756563695366,
+      "name": "Jesús Chirinos",
+      "email": "jach30041@gmail.com",
+      "phone": "+58 424-1655236",
+      "tickets": [
+        300,
+        616,
+        778,
+        916,
+        998
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756563695360-839649630.jpg",
+      "reference": "4442",
+      "createdAt": "2025-08-30T14:21:35.366Z"
+    },
+    {
+      "id": 1756563750105,
+      "name": "Cristal Valero",
+      "email": "puramelma28@gmail.com",
+      "phone": "+58 412-5719488",
+      "tickets": [
+        38,
+        39
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756563750104-704947259.jpg",
+      "reference": "1234",
+      "createdAt": "2025-08-30T14:22:30.105Z"
     }
   ]
 }
