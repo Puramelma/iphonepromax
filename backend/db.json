@@ -5042,22 +5042,6 @@
       "createdAt": "2025-08-27T18:14:23.216Z"
     },
     {
-      "id": 1756318522618,
-      "name": "Valentina Mendoza",
-      "email": "puramelma28@gmail.com",
-      "phone": "+58 424-1692296",
-      "tickets": [
-        105,
-        605,
-        578,
-        78
-      ],
-      "status": "approved",
-      "proof": "/uploads/proof-1756318522610-865114068.jpg",
-      "reference": "1234",
-      "createdAt": "2025-08-27T18:15:22.618Z"
-    },
-    {
       "id": 1756318570002,
       "name": "Jennifer Martinez",
       "email": "puramelma28@gmail.com",
@@ -5832,7 +5816,11 @@
       "phone": "04241692296",
       "tickets": [
         989,
-        391
+        391,
+        105,
+        605,
+        578,
+        78
       ],
       "status": "approved",
       "proof": "/uploads/proof-1756594181538-420792067.png",
