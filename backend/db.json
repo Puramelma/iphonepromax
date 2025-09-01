@@ -145,7 +145,7 @@
     },
     {
       "id": 35,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 36,
@@ -213,7 +213,7 @@
     },
     {
       "id": 52,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 53,
@@ -329,7 +329,7 @@
     },
     {
       "id": 81,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 82,
@@ -525,7 +525,7 @@
     },
     {
       "id": 130,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 131,
@@ -853,7 +853,7 @@
     },
     {
       "id": 212,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 213,
@@ -3953,7 +3953,7 @@
     },
     {
       "id": 987,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 988,
@@ -3969,7 +3969,7 @@
     },
     {
       "id": 991,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 992,
@@ -4722,26 +4722,6 @@
       "createdAt": "2025-08-27T17:32:39.838Z"
     },
     {
-      "id": 1756316116194,
-      "name": "Carlet Ojeda",
-      "email": "puramelma28@gmail.com",
-      "phone": "+58 412-5415628",
-      "tickets": [
-        311,
-        811,
-        517,
-        117,
-        115,
-        615,
-        626,
-        126
-      ],
-      "status": "approved",
-      "proof": "/uploads/proof-1756316116189-933780084.jpg",
-      "reference": "1234",
-      "createdAt": "2025-08-27T17:35:16.194Z"
-    },
-    {
       "id": 1756316294901,
       "name": "Fabrizio Fonseca",
       "email": "puramelma28@gmail.com",
@@ -4840,32 +4820,6 @@
       "proof": "/uploads/proof-1756316988810-200488490.jpg",
       "reference": "1234",
       "createdAt": "2025-08-27T17:49:48.815Z"
-    },
-    {
-      "id": 1756317192005,
-      "name": "Andrea Rodríguez",
-      "email": "puramelma28@gmail.com",
-      "phone": "+58 424-1796593",
-      "tickets": [
-        69,
-        569,
-        737,
-        237,
-        299,
-        799,
-        850,
-        350,
-        99,
-        599,
-        691,
-        191,
-        445,
-        945
-      ],
-      "status": "approved",
-      "proof": "/uploads/proof-1756317192001-827368188.jpg",
-      "reference": "1234",
-      "createdAt": "2025-08-27T17:53:12.005Z"
     },
     {
       "id": 1756317248662,
@@ -5166,22 +5120,6 @@
       "proof": "/uploads/proof-1756319220969-705857859.jpg",
       "reference": "1234",
       "createdAt": "2025-08-27T18:27:00.972Z"
-    },
-    {
-      "id": 1756319295431,
-      "name": "Yesenia Mendez",
-      "email": "puramelma28@gmail.com",
-      "phone": "+58 414-3927967",
-      "tickets": [
-        675,
-        175,
-        50,
-        550
-      ],
-      "status": "approved",
-      "proof": "/uploads/proof-1756319295428-822230251.jpg",
-      "reference": "1234",
-      "createdAt": "2025-08-27T18:28:15.431Z"
     },
     {
       "id": 1756319339309,
@@ -5826,6 +5764,87 @@
       "proof": "/uploads/proof-1756594181538-420792067.png",
       "reference": "5856",
       "createdAt": "2025-08-30T22:49:41.765Z"
+    },
+    {
+      "id": 1756689467519,
+      "name": "Lisbeth Mayora",
+      "email": "mayoralisbeth7@gmail.com",
+      "phone": "04241106195",
+      "tickets": [
+        52
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756689467288-946870439.jpg",
+      "reference": "9359",
+      "createdAt": "2025-09-01T01:17:47.519Z"
+    },
+    {
+      "id": 1756689664095,
+      "name": "Yesenia Mendez",
+      "email": "axelmachadomendez1@gmail.com",
+      "phone": "04143927967",
+      "tickets": [
+        35,
+        675,
+        175,
+        50,
+        550
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756689663772-798186170.jpg",
+      "reference": "7472",
+      "createdAt": "2025-09-01T01:21:04.095Z"
+    },
+    {
+      "id": 1756689753019,
+      "name": "Andrea Rodríguez",
+      "email": "andreguadaluper16@gmail.com",
+      "phone": "0424-1796593",
+      "tickets": [
+        81,
+        69,
+        569,
+        737,
+        237,
+        299,
+        799,
+        850,
+        350,
+        99,
+        599,
+        691,
+        191,
+        445,
+        945
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756689753008-370901153.jpeg",
+      "reference": "1",
+      "createdAt": "2025-09-01T01:22:33.019Z"
+    },
+    {
+      "id": 1756690413539,
+      "name": "carleth Ojeda curvelo",
+      "email": "caoc_30@hotmail.com",
+      "phone": "04125415628",
+      "tickets": [
+        212,
+        987,
+        991,
+        130,
+        311,
+        811,
+        517,
+        117,
+        115,
+        615,
+        626,
+        126
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756690413476-370391941.jpg",
+      "reference": "9661",
+      "createdAt": "2025-09-01T01:33:33.539Z"
     }
   ]
 }
