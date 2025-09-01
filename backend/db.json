@@ -245,7 +245,7 @@
     },
     {
       "id": 60,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 61,
@@ -277,7 +277,7 @@
     },
     {
       "id": 68,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 69,
@@ -3225,7 +3225,7 @@
     },
     {
       "id": 805,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 806,
@@ -3849,7 +3849,7 @@
     },
     {
       "id": 961,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 962,
@@ -3989,7 +3989,7 @@
     },
     {
       "id": 996,
-      "status": "free"
+      "status": "approved"
     },
     {
       "id": 997,
@@ -4188,32 +4188,6 @@
       "proof": "/uploads/proof-1756275056670-992753788.jpeg",
       "reference": "1234",
       "createdAt": "2025-08-27T06:10:56.677Z"
-    },
-    {
-      "id": 1756275988084,
-      "name": "Ruanda Subero",
-      "email": "puramelma28@gmail.com",
-      "phone": "+58 424-1961118",
-      "tickets": [
-        34,
-        208,
-        534,
-        708,
-        12,
-        96,
-        512,
-        596,
-        613,
-        113,
-        320,
-        820,
-        603,
-        103
-      ],
-      "status": "approved",
-      "proof": "/uploads/proof-1756275988075-736210259.jpeg",
-      "reference": "1234",
-      "createdAt": "2025-08-27T06:26:28.084Z"
     },
     {
       "id": 1756276830287,
@@ -5845,6 +5819,37 @@
       "proof": "/uploads/proof-1756690413476-370391941.jpg",
       "reference": "9661",
       "createdAt": "2025-09-01T01:33:33.539Z"
+    },
+    {
+      "id": 1756691048796,
+      "name": "Ruanda Subero",
+      "email": "ruandasubero@gmail.com",
+      "phone": "04241961118",
+      "tickets": [
+        68,
+        60,
+        961,
+        805,
+        996,
+        34,
+        208,
+        534,
+        708,
+        12,
+        96,
+        512,
+        596,
+        613,
+        113,
+        320,
+        820,
+        603,
+        103
+      ],
+      "status": "approved",
+      "proof": "/uploads/proof-1756691048504-857226676.jpg",
+      "reference": "0577",
+      "createdAt": "2025-09-01T01:44:08.796Z"
     }
   ]
 }
